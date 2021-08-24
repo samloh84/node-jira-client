@@ -3,7 +3,7 @@ Promise.config({longStackTraces: true, warnings: true})
 const _ = require('lodash');
 
 
-class CloudflareIssueCommentsApi {
+class JiraIssueCommentsApi {
     constructor(api) {
         this._api = api;
     }
@@ -73,4 +73,4 @@ class CloudflareIssueCommentsApi {
     }
 }
 
-module.exports = CloudflareIssueCommentsApi;
+module.exports = JiraIssueCommentsApi;

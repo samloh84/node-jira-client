@@ -1,10 +1,18 @@
 const Promise = require('bluebird');
 Promise.config({longStackTraces: true, warnings: true})
 const _ = require('lodash');
+const JiraIssueAttachmentsApi = require("./issue_attachments");
+const JiraIssueCommentsApi = require("./issue_comments");
+const JiraIssueRemoteLinksApi = require("./issue_remote_links");
 
 class JiraIssuesApi {
     constructor(api) {
         this._api = api;
+
+        this.attachments = new JiraIssueAttachmentsApi(api);
+        this.comments = new JiraIssueCommentsApi(api);
+        this.remote_links = new JiraIssueRemoteLinksApi(api);
+
     }
 
 

@@ -2,6 +2,8 @@ const Promise = require('bluebird');
 Promise.config({longStackTraces: true, warnings: true})
 const axios = require('axios');
 const _ = require('lodash');
+const JiraIssuesApi = require("./issue");
+const JiraProjectsApi = require("./project");
 const {deepResolve} = require('./util');
 
 
@@ -9,6 +11,10 @@ class JiraApi {
     constructor(params) {
         this._token = _.get(params, 'token');
         this._api_base = _.get(params, 'api_base', 'jira.atlassian.com/rest/api');
+
+        this.issues = new JiraIssuesApi(this);
+        this.projects = new JiraProjectsApi(this);
+
     }
 
     get api_base() {

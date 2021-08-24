@@ -3,7 +3,7 @@ Promise.config({longStackTraces: true, warnings: true})
 const _ = require('lodash');
 
 
-class CloudflareIssueAttachmentsApi {
+class JiraIssueAttachmentsApi {
     constructor(api) {
         this._api = api;
     }
@@ -54,4 +54,4 @@ class CloudflareIssueAttachmentsApi {
 
 }
 
-module.exports = CloudflareIssueAttachmentsApi;
+module.exports = JiraIssueAttachmentsApi;
