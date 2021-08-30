@@ -26,7 +26,7 @@ class JiraIssuesApi {
         let url_slug = "search";
 
         let config = {params: params};
-        
+
         return api._get(url_slug, config);
     }
 
@@ -101,6 +101,25 @@ class JiraIssuesApi {
 
 
         let url_slug = `issue/${issue_id}/editmeta`;
+
+        return api._get(url_slug);
+    }
+
+
+    get_issue_meta(project_id) {
+        let api = this._api;
+
+
+        let url_slug = `issue/createmeta/${project_id}/issuetypes`;
+
+        return api._get(url_slug);
+    }
+
+    get_issue_meta_fields(project_id, issue_type_id) {
+        let api = this._api;
+
+
+        let url_slug = `issue/createmeta/${project_id}/issuetypes/${issue_type_id}`;
 
         return api._get(url_slug);
     }
