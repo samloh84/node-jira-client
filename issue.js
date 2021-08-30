@@ -15,13 +15,19 @@ class JiraIssuesApi {
 
     }
 
-
-    list() {
+    list(params) {
         let api = this._api;
 
-        let url_slug = "issue";
-        return api._get(url_slug);
+
+        if (_.isEmpty(params)) {
+            params = {};
+        }
+
+        let url_slug = "search";
+
+        return api._post(url_slug, params);
     }
+
 
     create(params) {
         let api = this._api;
@@ -118,8 +124,6 @@ class JiraIssuesApi {
         let url_slug = `issue/${project_id}/restore`;
         return api._put(url_slug);
     }
-
-
 
 
 }
