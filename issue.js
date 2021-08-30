@@ -25,7 +25,9 @@ class JiraIssuesApi {
 
         let url_slug = "search";
 
-        return api._post(url_slug, params);
+        let config = {params: params};
+        
+        return api._get(url_slug, config);
     }
 
 
