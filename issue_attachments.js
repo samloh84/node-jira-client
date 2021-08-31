@@ -1,6 +1,7 @@
 const Promise = require('bluebird');
 Promise.config({longStackTraces: true, warnings: true})
 const _ = require('lodash');
+const {deepResolve, serializeAsFormData} = require('./util')
 
 
 class JiraIssueAttachmentsApi {
@@ -17,7 +18,14 @@ class JiraIssueAttachmentsApi {
 
 
         let url_slug = `issue/${issue_id}/attachments`;
-        return api._post(url_slug, params);
+
+        return deepResolve(params)
+            .then(function (params) {
+                return serializeAsFormData(params)
+            })
+            .then(function (params) {
+                return api._post(url_slug, params);
+            });
     }
 
 
@@ -40,7 +48,6 @@ class JiraIssueAttachmentsApi {
 
         return api._put(url_slug, params);
     }
-
 
 
     delete(issue_id, attachment_id) {
