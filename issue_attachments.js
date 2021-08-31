@@ -38,16 +38,23 @@ class JiraIssueAttachmentsApi {
         return api._get(url_slug);
     }
 
-
     update(issue_id, attachment_id, params) {
         let api = this._api;
         if (_.isEmpty(params)) {
             params = {};
         }
 
+
         let url_slug = `issue/${issue_id}/attachments/${attachment_id}`;
 
-        return api._put(url_slug, params);
+        return deepResolve(params)
+            .then(function (params) {
+                return serializeAsFormData(params)
+            })
+            .then(function (form_data) {
+                let headers = _.assign({}, form_data.getHeaders(), {"X-Atlassian-Token": "no-check"})
+                return api._post(url_slug, form_data, {headers: headers});
+            });
     }
 
 
