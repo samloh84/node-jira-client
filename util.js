@@ -1,6 +1,7 @@
 const Promise = require('bluebird');
 Promise.config({longStackTraces: true, warnings: true})
 const _ = require('lodash');
+const FormData = require('form-data');
 
 let serializeAsFormData = function (object, formData, path) {
     if (_.isNil(formData)) {
