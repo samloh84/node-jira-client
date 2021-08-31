@@ -24,7 +24,8 @@ class JiraIssueAttachmentsApi {
                 return serializeAsFormData(params)
             })
             .then(function (form_data) {
-                return api._post(url_slug, form_data, {headers: form_data.getHeaders()});
+                let headers = _.assign({}, form_data.getHeaders(), {"X-Atlassian-Token": "no-check"})
+                return api._post(url_slug, form_data, {headers: headers});
             });
     }
 
