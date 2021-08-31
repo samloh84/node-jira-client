@@ -23,8 +23,8 @@ class JiraIssueAttachmentsApi {
             .then(function (params) {
                 return serializeAsFormData(params)
             })
-            .then(function (params) {
-                return api._post(url_slug, params);
+            .then(function (form_data) {
+                return api._post(url_slug, form_data, {headers: form_data.getHeaders()});
             });
     }
 
