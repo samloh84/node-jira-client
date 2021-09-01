@@ -2,7 +2,7 @@ const Promise = require('bluebird');
 Promise.config({longStackTraces: true, warnings: true})
 const _ = require('lodash');
 const {deepResolve, serializeAsFormData} = require('./util')
-
+const FormData = require('form-data');
 
 class JiraIssueAttachmentsApi {
     constructor(api) {
@@ -21,7 +21,11 @@ class JiraIssueAttachmentsApi {
 
         return deepResolve(params)
             .then(function (params) {
-                return serializeAsFormData(params)
+                if (params instanceof FormData) {
+                    return Promise.resolve(params);
+                } else {
+                    return serializeAsFormData(params)
+                }
             })
             .then(function (form_data) {
                 let headers = _.assign({}, form_data.getHeaders(), {"X-Atlassian-Token": "no-check"})
@@ -49,7 +53,11 @@ class JiraIssueAttachmentsApi {
 
         return deepResolve(params)
             .then(function (params) {
-                return serializeAsFormData(params)
+                if (params instanceof FormData) {
+                    return Promise.resolve(params);
+                } else {
+                    return serializeAsFormData(params)
+                }
             })
             .then(function (form_data) {
                 let headers = _.assign({}, form_data.getHeaders(), {"X-Atlassian-Token": "no-check"})
